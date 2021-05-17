@@ -1,6 +1,6 @@
-.settings
-.vscode
-.classpath
-.factorypath
-.project
-.nbactions.xml
+.settings/
+.vscode/
+*.classpath
+*.factorypath
+*.project
+*.nbactions.xml
