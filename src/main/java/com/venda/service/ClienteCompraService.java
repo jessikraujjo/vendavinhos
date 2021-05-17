@@ -13,6 +13,7 @@ import com.google.gson.reflect.TypeToken;
 import com.venda.models.Cliente;
 import com.venda.models.ClienteCompra;
 import com.venda.models.Compras;
+import com.venda.util.Utils;
 
 import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
@@ -85,7 +86,6 @@ public class ClienteCompraService {
         List<String> fieisClientes = new ArrayList<String>();
        
         for(String cliente: map.keySet()){ 
-            System.out.println("cpf :"+cliente+" valores: "+ map.get(cliente));
             if( map.get(cliente) >= 5){ 
                 fieisClientes.add(cliente);//add em lista os que mais compram
             }
@@ -114,7 +114,8 @@ public class ClienteCompraService {
         List<ClienteCompra> listaclicompra = new ArrayList<ClienteCompra>();
 
         for (Cliente cliente : clienteArray) { // percorrer clientes
-            cliente.setCpf(cliente.getCpf().replaceAll("[^0-9]", "")); //  eliminar pontuacoes do cpf
+            String cpfsempontos = Utils.retiraCaracteresEspeciais(cliente.getCpf());
+            cliente.setCpf(cpfsempontos);
             for (Compras compra : compraArray) {    // percorrer compras
                 compra.setCliente(compra.getCliente().replaceAll("[^0-9]", "")); //  eliminar pontuacoes do cpf
                 if (compra.getCliente().length() == 12) { //erro em cpf no historico de compras um zero a mais
